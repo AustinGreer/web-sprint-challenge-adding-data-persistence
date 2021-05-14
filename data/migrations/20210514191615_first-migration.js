@@ -10,6 +10,14 @@ exports.up = async function(knex) {
             .notNullable()
             .defaultTo(0)
     })
+
+    .createTable('resources', tbl => {
+        tbl.increments('resource_id')
+        tbl.string('resource_name')
+            .notNullable()
+            .unique()
+        tbl.string('resource_description')
+    })
 };
 
 exports.down = function(knex) {
