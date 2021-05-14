@@ -18,6 +18,20 @@ exports.up = async function(knex) {
             .unique()
         tbl.string('resource_description')
     })
+
+    .createTable('tasks', tbl => {
+        tbl.increments('task_id')
+        tbl.string('task_description')
+            .notNullable()
+        tbl.string('task_notes')
+        tbl.integer('task_completed')
+            .defaultTo(0)
+        tbl.integer('resource_id')
+            .unsigned()
+            .notNullable()
+            .references('resource_id')
+            .inTable('resources')
+    })
 };
 
 exports.down = function(knex) {
